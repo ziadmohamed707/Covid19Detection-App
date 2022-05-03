@@ -20,7 +20,7 @@ class _WorldState extends State<World> with TickerProviderStateMixin {
       padding: EdgeInsets.symmetric(
           vertical: height * 0.01, horizontal: width * 0.02),
       width: width,
-      height: height * 0.57,
+      height:height,
       child: Stack(
         children: <Widget>[
           Text(
@@ -55,15 +55,18 @@ class GlobalDataList extends StatelessWidget {
             int recoveredCount = int.parse(snapshot.data.recovered);
 
             return Container(
-              height: height * 0.6,
+              height: height,
               width: width * 0.95,
               child: ListView(
                 children: <Widget>[
+                  MainImage(),
+                  SizedBox(height: height * 0.035),
                   WidgetAnimator(
                     GlobalListTile(
                       caseInfo: formatter.format(caseCount),
                       infoHeader: 'Cases',
-                      tileColor: Colors.blueAccent.withAlpha(200),
+                      cardColor: Colors.white,
+                      titleColor: Colors.blueAccent,
                       assetImage: 'images/covidBlue.png',
                     ),
                   ),
@@ -71,7 +74,8 @@ class GlobalDataList extends StatelessWidget {
                     GlobalListTile(
                       caseInfo: formatter.format(deathCount),
                       infoHeader: 'Deaths',
-                      tileColor: Colors.red.withAlpha(200),
+                      cardColor: Colors.white,
+                      titleColor: Colors.red,
                       assetImage: 'images/death.png',
                     ),
                   ),
@@ -79,7 +83,8 @@ class GlobalDataList extends StatelessWidget {
                     GlobalListTile(
                       caseInfo: formatter.format(recoveredCount),
                       infoHeader: 'Recoveries',
-                      tileColor: Colors.green.withAlpha(200),
+                      cardColor: Colors.white,
+                      titleColor: Colors.green,
                       assetImage: 'images/recover.png',
                     ),
                   )
@@ -100,6 +105,62 @@ class GlobalDataList extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class MainImage extends StatefulWidget {
+  @override
+  _MainImageState createState() => _MainImageState();
+}
+
+class _MainImageState extends State<MainImage>
+    with SingleTickerProviderStateMixin {
+  Animation<double> animation;
+  AnimationController _animationController;
+
+  toggleAnimation() {
+    animation = Tween(begin: 0.0, end: 25.0).animate(_animationController);
+    if (_animationController.isDismissed) {
+      _animationController.forward().whenComplete(() => toggleAnimation());
+    }
+    if (_animationController.isCompleted) {
+      _animationController.reverse().whenComplete(() => toggleAnimation());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = new AnimationController(
+        duration: Duration(milliseconds: 3000), vsync: this)
+      ..addListener(() => setState(() {}));
+    toggleAnimation();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      offset: Offset(0, animation.value),
+      child: Column(
+        children: <Widget>[
+          Image.asset(
+            'images/personFighting.png',
+            height: MediaQuery.of(context).size.height * 0.25,
+          ),
+          Text(
+            "Stay Home, Stay Safe!",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )
+        ],
       ),
     );
   }

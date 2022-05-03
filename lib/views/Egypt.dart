@@ -73,14 +73,16 @@ class _EgyptState extends State<Egypt> with TickerProviderStateMixin {
                               HomeTile(
                                 caseCount: snapshot.data.cases,
                                 infoHeader: 'Cases',
-                                tileColor: Colors.blueAccent,
+                                cardColor: Colors.white,
+                                titleColor: Colors.blueAccent,
                               ),
                             ),
                             WidgetAnimator(
                               HomeTile(
                                 caseCount: snapshot.data.recovered,
                                 infoHeader: 'Recoveries',
-                                tileColor: Colors.green,
+                                cardColor: Colors.white,
+                                titleColor: Colors.green,
                               ),
                             ),
                           ],
@@ -92,14 +94,16 @@ class _EgyptState extends State<Egypt> with TickerProviderStateMixin {
                               HomeTile(
                                 caseCount: snapshot.data.deaths,
                                 infoHeader: 'Deaths',
-                                tileColor: Colors.redAccent,
+                                cardColor: Colors.white,
+                                titleColor: Colors.redAccent,
                               ),
                             ),
                             WidgetAnimator(
                               HomeTile(
                                 caseCount: snapshot.data.totalTests,
                                 infoHeader: 'Tests',
-                                tileColor: Colors.orangeAccent,
+                                cardColor: Colors.white,
+                                titleColor: Colors.orangeAccent,
                               ),
                             ),
                           ],

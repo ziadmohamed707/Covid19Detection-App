@@ -136,37 +136,41 @@ class _DetictPageState extends State<DetictPage> {
                                         ),
                                         Padding(
                                           padding: EdgeInsets.all(10),
-                                          child: Container(
-                                            height: 40,
-                                            width: 160,
-                                            padding: EdgeInsets.only(
-                                                top: 10,
-                                                left: 5,
-                                                bottom: 10,
-                                                right: 5),
-                                            decoration: BoxDecoration(
-                                              color: Colors.deepPurpleAccent.shade100,
-                                              borderRadius: BorderRadius.circular(10),
+                                          child: Card(
+                                            elevation: 0.001,
+                                            child: Container(
+                                              height: 40,
+                                              width: 160,
+                                              padding: EdgeInsets.only(
+                                                  top: 10,
+                                                  left: 5,
+                                                  bottom: 10,
+                                                  right: 5),
+                                              decoration: BoxDecoration(
+                                                color: Colors.white.withAlpha(200),
+                                                borderRadius: BorderRadius.circular(5),
+
+                                              ),
+                                              child: _imagePrediction != null
+                                                  ? Text(
+                                                      "$_imagePrediction".toUpperCase(),
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Colors.orange,
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      "NO IMAGE",
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Colors.orange,
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
                                             ),
-                                            child: _imagePrediction != null
-                                                ? Text(
-                                                    "$_imagePrediction".toUpperCase(),
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  )
-                                                : Text(
-                                                    "NO IMAGE",
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  ),
                                           ),
                                         ),
                                       ],
@@ -182,13 +186,19 @@ class _DetictPageState extends State<DetictPage> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: Colors.deepPurpleAccent.shade100,
-          onPressed: runImageModel,
-          icon: Icon(
-            Icons.photo_album_outlined,
+        floatingActionButton: Container(
+          child: FloatingActionButton.extended(
+            backgroundColor: Colors.white,
+            onPressed: runImageModel,
+            icon: Icon(
+              Icons.photo_album_outlined,
+              color: Colors.orange,
+            ),
+            shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(5)
+            ),
+            label: Text("Select image",style: TextStyle(color: Colors.orange)),
           ),
-          label: Text("Select image"),
         ),
       ),
     );

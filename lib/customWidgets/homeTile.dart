@@ -4,20 +4,21 @@ import 'package:intl/intl.dart';
 class HomeTile extends StatelessWidget {
   final int caseCount;
   final String infoHeader;
-  final Color tileColor;
-  HomeTile({this.caseCount, this.infoHeader, this.tileColor});
+  final Color cardColor;
+  final Color titleColor;
+  HomeTile({this.caseCount, this.infoHeader, this.cardColor,this.titleColor});
   final formatter = NumberFormat("###,###");
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Card(
-        elevation: 3.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-        color: tileColor,
+        elevation: 0.0001,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        color: cardColor,
         child: Container(
     padding: EdgeInsets.symmetric(
-        vertical: height * 0.02, horizontal: width * 0.04),
+        vertical: height * 0.02, horizontal: width * 0.05),
     width: width * 0.45,
     height: height * 0.13,
     child: Column(
@@ -28,19 +29,19 @@ class HomeTile extends StatelessWidget {
           "COVID-19",
           style: TextStyle(
               fontFamily: 'MyFont',
-              color: Colors.white,
+              color: titleColor,
               fontSize: height * 0.015),
         ),
         SizedBox(height: height * 0.007),
         Text("Total $infoHeader",
             style: TextStyle(
                 fontFamily: 'MyFont',
-                color: Colors.white,
+                color: titleColor,
                 fontWeight: FontWeight.bold,
                 fontSize: height * 0.02)),
         Text("${formatter.format(caseCount)}",
             style: TextStyle(
-                color: Colors.white,
+                color: titleColor,
                 fontSize: height * 0.025,
                 fontFamily: 'MyFont'))
       ],
